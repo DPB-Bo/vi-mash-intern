@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '@auth/services/login.service';
-import { IconService } from './core/services/icon/icon.service';
-import { LocalizationService } from './core/services/localization/localization.service';
+import { IconService } from '@core/services/icon/icon.service';
+import { LocalizationService } from '@core/services';
 
 @Component({
   selector: 'app-root',

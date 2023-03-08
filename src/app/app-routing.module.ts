@@ -5,11 +5,11 @@ import { RoleGuard } from '@core/guards/role.guard';
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

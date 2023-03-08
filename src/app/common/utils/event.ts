@@ -53,7 +53,7 @@ const re = (set:any, way:any) => set[way + 'RE'] || new RegExp('[' + set[way] + 
 //   sets.reduce((str, set) => str.replace(re(set, 'full'), toHalf(set)), str0);
 
 
-const half_1:String[] = ['ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ',
+const half_1: string[] = ['ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ',
  'ﾊﾞ', 'ﾋﾞ', 'ﾌﾞ', 'ﾍﾞ', 'ﾎﾞ', 'ﾊﾟ', 'ﾋﾟ', 'ﾌﾟ', 'ﾍﾟ', 'ﾎﾟ'];
 const full_1 = ['ヴ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド',
 'バ', 'ビ', 'ブ', 'ベ', 'ボ', 'パ', 'ピ', 'プ', 'ペ', 'ポ'];
@@ -103,9 +103,11 @@ export const convertHalfToFull = (str0:any) => {
   for (let i = 0; i < half_1.length; i++) {
     str0 = str0.replaceAll(half_1[i], full_1[i]);
   }
+
   for (let i = 0; i < half_2.length; i++) {
     str0 = str0.replaceAll(half_2[i], full_2[i]);
   }
+
   return str0.replace(/[!-~]/g, shiftCharCode(0xFEE0));
 };
 
@@ -114,9 +116,11 @@ export const convertFullToHalf = (str0:any) => {
     str0 = str0.replaceAll(full_1[i], half_1[i]);
     str0 = str0.replaceAll('ﾟ','');
   }
+
   for (let i = 0; i < full_2.length; i++) {
     str0 = str0.replaceAll(full_2[i], half_2[i]);
     str0 = str0.replaceAll('ﾟ','');
   }
+
   return str0;
 };
