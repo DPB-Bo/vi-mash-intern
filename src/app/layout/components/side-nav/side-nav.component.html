@@ -1,0 +1,73 @@
+<nz-sider [nzCollapsible]="false"
+          [nzCollapsed]="true"
+          nzWidth="70px"
+          [nzTheme]="'light'">
+  <div class="logo">
+    <mat-icon svgIcon="logoSideNavMenu"></mat-icon>
+  </div>
+  <ul nz-menu
+      nzTheme="light"
+      nzMode="inline"
+      class="sub-menu">
+    <ng-container class="flex-class"
+                  *ngFor="let node of dataMenu ; let index= index">
+      <li *ngIf="node.children.length > 0  && !node.hidden"
+          nz-submenu
+          nzTitle="{{node.name | translate}}" >
+        <ng-container *ngIf="node.children.length > 0">
+          <ul [ngClass]="{
+              'flex-grid': node.children.length > 8,
+              'flex-columns': node.children.length < 9
+            }">
+            <li nz-menu-item
+                [nzMatchRouter]="item.route"
+                [routerLink]="item.route"
+                *ngFor="let item of node.children" class="{{(item?.role && userLogin.roles[0].role !== item?.role) || item.hidden ? 'display-none' : ''}}">
+              <mat-icon class="color"
+                        [svgIcon]="item.icon || ''"></mat-icon>
+              {{ item.name | translate }} {{item.hidden}}
+            </li>
+
+          </ul>
+        </ng-container>
+      </li>
+      <li *ngIf="node.children.length === 0 || node.hidden"
+          nz-menu-item
+          class="specical-item-menu {{handelForcusMenu(node.router ? node.router : '') ? 'specical-item-menu-forcus' :'specical-item-menu-not-forcus'}}"
+          [routerLink]="node.route">
+        <span>
+          {{node.name | translate}}
+        </span>
+      </li>
+    </ng-container>
+  </ul>
+  <ul nz-menu
+      nzTheme="light"
+      [nzMode]="'vertical'"
+      class="user-menu {{userLogin.roles[0].role === 'SYSTEM' ? 'reponsive-system' : 'reponsive-user'}}">
+    <ng-container *ngFor="let node of users ; let index= index">
+      <li nz-submenu
+          [nzTitle]="user">
+        <ng-container *ngIf="node.children.length > 0">
+          <ul [ngClass]="{'flex-grid': node.children.length > 8,'flex-columns': node.children.length < 9}">
+            <li nz-menu-item
+                class="user-menu"
+                *ngFor="let item of node.children"
+                (click)="onClickMenuClick(item)">
+              <mat-icon class="color"
+                        [svgIcon]="item.icon || ''"></mat-icon>
+              {{ item.name | translate }}
+            </li>
+          </ul>
+        </ng-container>
+      </li>
+    </ng-container>
+  </ul>
+</nz-sider>
+
+<ng-template #user>
+  <mat-icon class="color user"
+            svgIcon="icon-user"></mat-icon>
+            <div class="name-role">{{name}}</div>
+            <div class="name-role">{{role}}</div>
+</ng-template>

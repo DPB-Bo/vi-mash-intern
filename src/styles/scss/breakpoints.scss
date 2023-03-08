@@ -1,0 +1,23 @@
+@mixin max-desktop-down-1920 {
+  @media (min-width: 1919px) {
+    @content;
+  }
+}
+
+@mixin max-desktop-down-1600 {
+  @media (min-width: 1600px) {
+    @content;
+  }
+}
+
+@mixin max-desktop-down-1440 {
+  @media (min-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin max-desktop-down-1280 {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}

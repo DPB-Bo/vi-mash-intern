@@ -1,0 +1,176 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "require-jsdoc": [
+          "error",
+          {
+            "require": {
+              "FunctionDeclaration": false,
+              "MethodDefinition": false,
+              "ClassDeclaration": false,
+              "ArrowFunctionExpression": false,
+              "FunctionExpression": false
+            }
+          }
+        ],
+        "max-len": [
+          "error",
+          {
+            "code": 200
+          }
+        ],
+        "new-cap": "off",
+        "semi": "error",
+        "comma-dangle": [
+          "error",
+          {
+            "arrays": "never",
+            "objects": "never",
+            "imports": "never",
+            "exports": "never",
+            "functions": "never"
+          }
+        ],
+        "object-curly-spacing": "off",
+        "@typescript-eslint/semi": [
+          "error"
+        ],
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/prefer-for-of": "error",
+        "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "property",
+            "format": [
+              "camelCase",
+              "PascalCase",
+              "UPPER_CASE"
+            ]
+          }
+        ],
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error"
+        ],
+        "eqeqeq": "error",
+        "strict": "error",
+        "no-undef": "off",
+        "camelcase": "error",
+        "quotes": [
+          "error",
+          "single"
+        ],
+        "padding-line-between-statements": [ // This controls empty lines between blocks and more
+          "error",
+          // Empty Line BEFORE
+          {
+            "blankLine": "always",
+            "prev": "*",
+            "next": [
+              "block",
+              "block-like",
+              "class",
+              "continue",
+              "default",
+              "debugger",
+              "case",
+              "export",
+              "do",
+              "while",
+              "if",
+              "for",
+              "function",
+              "return",
+              "try",
+              "with"
+            ]
+          },
+          // Empty Line AFTER
+          {
+            "blankLine": "always",
+            "prev": [
+              "const",
+              "let",
+              "var",
+              "block",
+              "block-like",
+              "class",
+              "continue",
+              "debugger",
+              "case",
+              "do",
+              "while",
+              "if",
+              "for",
+              "function",
+              "return",
+              "try",
+              "with"
+            ],
+            "next": "*"
+          },
+          {
+            "blankLine": "any",
+            "prev": [
+              "const",
+              "let",
+              "var"
+            ],
+            "next": [
+              "const",
+              "let",
+              "var"
+            ]
+          }
+        ],
+        "no-debugger": "error",
+        "no-console": "error",
+        "no-var": "error",
+        "no-alert": "error"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

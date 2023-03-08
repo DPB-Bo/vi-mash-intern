@@ -1,0 +1,478 @@
+@import "src/styles/styles-variables.scss";
+
+.container {
+  background-color: $background-default;
+  padding: 8px 20px 8px 20px;
+  border-radius: 2px;
+  margin-right: 20px;
+
+  .tbl-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    .tbl-title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: $color-primary;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.014em;
+
+      .btn-area-table {
+        display: flex;
+        gap: 8px
+      }
+    }
+
+    .pagination {
+      display: flex;
+      gap: 2px;
+      align-items: center;
+
+      .pgn-total {
+        color: rgba(67, 146, 187, 1);
+        font-size: 13px;
+      }
+
+      .pgn-label {
+        color: rgba(159, 159, 159, 1);
+        font-size: 13px;
+      }
+    }
+  }
+
+  .table-container {
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+
+    .cdk-column-status {
+      border-left: 1px solid rgb(242, 242, 242);
+
+      .status-col {
+        margin: auto;
+      }
+    }
+
+    &.hiddenScrollBar {
+      overflow: hidden;
+    }
+
+    .btn-action {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 38px;
+    }
+
+    .status-col {
+      border-bottom: none;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      align-items: center;
+
+      span {
+        height: 20px;
+        border-radius: 4px;
+
+        &:first-child {
+          width: 28px;
+
+          &.not-yet {
+            color: #7D63CC;
+            background-color: #F7F4FC;
+          }
+
+          &.done {
+            color: #2FA46F;
+            background-color: #E4F9EE;
+          }
+
+          &.in-progress {
+            color: #EBB71C;
+            background-color: #FFF5D1;
+          }
+        }
+
+        &:nth-child(2) {
+          width: 77px;
+
+          &.close {
+            background: #FFF1F1;
+            color: #EB5757;
+          }
+
+          &.open {
+            background: #F2F2F2;
+            color: #9F9F9F;
+          }
+        }
+      }
+
+    }
+  }
+
+  .text-color-col {
+    margin: auto;
+
+    span {
+      &.untreated {
+        color: #9F9F9F !important;
+      }
+
+      &.processing {
+        color: #EBB71C !important;
+      }
+
+      &.processed {
+        color: #2FA46F !important;
+      }
+    }
+  }
+
+  .table-container.hidden-scroll {
+    overflow-x: hidden;
+  }
+
+  .no-data-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: $ghostWhite;
+    margin-top: 8px;
+
+    span {
+      margin: 15px auto;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 150%;
+      color: $fiord;
+      text-align: center;
+    }
+  }
+
+  .mat-row .mat-cell {
+    cursor: pointer;
+    gap: 8px;
+  }
+
+  .mat-row:nth-child(2n):hover {
+    color: $black;
+
+    .mat-table-sticky {
+      background-color: $pattemsBlue  !important;
+    }
+  }
+
+  .mat-row:hover .mat-cell {
+    background-color: $pattemsBlue  !important;
+    color: $black;
+  }
+
+  .mat-table-sticky {
+    // background-color: $white;
+    opacity: 1;
+  }
+
+  .mat-header-cell,
+  .mat-footer-cell,
+  .mat-cell {
+    padding: 4px;
+  }
+
+  ::ng-deep .table-container .mat-sort-header-container {
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  ::ng-deep .table-container .cell-align-center .mat-sort-header-container {
+    justify-content: center;
+  }
+
+  ::ng-deep .table-container .mat-table-sticky-border-elem-right {
+    border-left: 1px solid rgba(242, 242, 242, 1);
+  }
+
+  ::ng-deep .table-container tr.mat-header-row {
+    height: 30px;
+
+    th {
+      // padding: 10px;
+    }
+
+    th:first-child {
+      padding-left: 20px;
+    }
+  }
+
+  ::ng-deep .table-container tr.mat-row {
+    height: 38px;
+    border-bottom: none;
+
+    td {
+      padding: 4px;
+    }
+
+    td:first-child {
+      padding-left: 20px;
+    }
+
+  }
+
+  .cell-align-right {
+    text-align: right;
+  }
+
+  .cell-align-center {
+    text-align: center;
+  }
+
+  .selected-row {
+    background-color: $color-primary  !important;
+
+    td {
+      color: $white;
+
+      mat-icon svg {
+        fill: $white;
+      }
+    }
+
+    .mat-table-sticky {
+      // background-color: $color-primary  !important;
+    }
+  }
+
+  .mat-row:nth-child(2n) {
+    // background-color: $azure;
+
+    .mat-table-sticky {
+      // background-color: $azure;
+    }
+  }
+
+  .total {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    span {
+      margin: 10px 20px 0 0;
+    }
+  }
+
+  .mat-header-cell.mat-table-sticky {
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .label {
+    display: flex;
+    -webkit-box-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0.375rem 0.25rem;
+    margin-bottom: 0;
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: $white;
+    text-align: center;
+    white-space: nowrap;
+    background-color: $pacificBlue;
+    border-radius: 0.25rem 0 0 0.25rem;
+    min-width: 100px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+   // margin-top: 8px;
+    background: $background-default;
+
+    .mat-row:nth-child(2n) {
+      background-color: $even-odd-row;
+    }
+  }
+
+  .row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-left: 10px;
+
+    .col {
+      display: flex;
+      width: 45%;
+    }
+
+    .col.last {
+      margin-right: 10px;
+    }
+
+    .date {
+      margin-right: 10px;
+    }
+  }
+
+  ::ng-deep .mat-header-cell {
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 150%;
+    letter-spacing: 0.014em;
+    color: $fiord;
+  }
+
+  tr.mat-row.highlight {
+    background-color: $blizzardBlue  !important;
+  }
+
+  .mat-cell {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 150%;
+    letter-spacing: 0.014em;
+    color: $fiord;
+  }
+
+  .mat-header-cell {
+    font-size: 14px;
+  }
+
+  .btn-show-more {
+    display: flex;
+    justify-content: center;
+    padding: 8px 18px 0 18px;
+
+    .mat-stroked-button {
+      border: 1px solid rgba(214, 214, 214, 1);
+      padding: 7.5px 22px;
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        width: 10px;
+      }
+    }
+  }
+
+  .table-footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 5px 6px;
+    padding: 10px 0;
+
+    span {
+      margin-right: 10px;
+      font-size: 13px;
+    }
+  }
+
+  ::ng-deep mat-checkbox.checkbox .mat-checkbox-frame {
+    border-color: rgba(214, 214, 214, 1);
+  }
+
+  ::ng-deep .mat-raised-button.btn-export {
+    min-width: 28px;
+    padding: 0 0.5px;
+    height: 28px;
+
+    mat-icon {
+      height: 19px;
+      width: 13px;
+      margin-top: -18px;
+    }
+  }
+
+  ::ng-deep .btn-export {
+    border-width: 1px;
+
+    &:hover {
+      background-color: $whiteSmoke;
+    }
+
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.5;
+      color: $color-primary;
+    }
+  }
+
+  ::ng-deep .btn-icon {
+    //border-width: 1px;
+
+    &:hover {
+      background-color: $lochmara;
+    }
+
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.5;
+      background: $sail;
+    }
+  }
+
+  ::ng-deep .btn-action .mat-icon:hover svg .icon-delete {
+    fill: $fireBrick2  !important;
+  }
+  ::ng-deep .btn-action .mat-icon:hover svg .icon-edit {
+    fill: $lochmara  !important;
+  }
+  .mat-raised-button.btn-icon {
+    min-width: 30px;
+    padding: 0 0.5px;
+    height: 30px;
+    width: 30px;
+
+    mat-icon {
+      height: 19px;
+      width: 13px;
+      //margin-top: -18px;
+    }
+  }
+
+  ::ng-deep .cell-align-center .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  ::ng-deep .cdk-program-focused .mat-sort-header-container {
+    border-bottom: none;
+  }
+
+  ::ng-deep .table-container span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+  }
+
+ .preview button {
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+
+    &.export {
+      background-color: $color-primary;
+    }
+
+    &.export:hover:not(:disabled) {
+      background-color: $color-primary;
+      filter: brightness(1.1);
+    }
+
+    &.export:disabled {
+      opacity: 0.7;
+      cursor: default;
+    }
+  }
+}

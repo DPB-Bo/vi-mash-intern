@@ -1,0 +1,122 @@
+@import "~@angular/material/theming";
+@import "./scss/breakpoints.scss";
+
+$md-primary: (
+  50: #ecebf5,
+  100: #cfcee5,
+  200: #b0aed4,
+  300: #908dc2,
+  400: #7874b5,
+  500: #605ca8,
+  600: #5854a0,
+  700: #4e4a97,
+  800: #44418d,
+  900: #33307d,
+  A100: rgba(41, 117, 156, 1),
+  A200: #9793ff,
+  A400: #4392bb,
+  A700: #4e47ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: rgba(41, 117, 156, 1),
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+// Copy the palettes from your selected theme (usually theme.scss).
+$app-primary: mat-palette($md-primary, A400);
+$app-accent: mat-palette($mat-deep-purple, A400, A100, A400);
+$app-warn: mat-palette($mat-red);
+
+// Create your Sass color vars (will be available in all the project)
+// $primary: mat-color($app-primary);
+$primary: mat-color($app-primary);
+$accent: mat-color($app-accent);
+$warn: #eb5757;
+$color-primary: #4392bb;
+$color-background-hover: rgba(149, 219, 255, 0.35);
+$color-background-hover-seleted: #effaff;
+$color-netural: #f2f2f2;
+$background-default: #F9FCFF;
+$even-odd-row : #F2F6FF;
+
+$font-primary: #4392bb;
+$font-strong: #252525;
+$font-accent: black;
+$font-warn: #eb5757;
+
+$fa-font-path: "../node_modules/@fortawesome/fontawesome-free-webfonts/webfonts";
+
+$borderMargin: 10px;
+$borderRadius: 20px;
+$tableMargin: 8px;
+$mainToolbarHeight: 56px;
+$userIconSize: 32px;
+$sideNavWidth: 260px;
+$sideNavBgColor: rgb(243, 243, 243);
+$searchIconColor: rgb(56, 56, 56);
+$buttonMinWidth: 150px;
+$mainBackground: #f9fafe;
+$stickyTop:52px;
+
+$blue3s: #26b9f2;
+$black3s: #343a40;
+$white3s: white;
+$grey3s: #e9e9ea; //this is for footer bar and table headers
+$grey: #757575; //this is for footer bar and table headers
+$greyBackground: #f3f3f3; // for authentication
+
+$warningOrange: #ffbe4d;
+$successGreen: #27ae60;
+$errorRed: #eb5757;
+$nobel: #9f9f9f;
+$white: #ffffff;
+$fiord: #485764;
+$flamingo: #eb5757;
+$sail: #a6d1e7;
+$fireBrick: #b71c1c;
+$fireBrick2: #ca1c1c;
+$ghostWhite: #f4f5f9;
+$lightGrey: #d6d6d6;
+$backGroundMain: #e5e9f7;
+$toolTipsError: #eb5757;
+$toastError: #ef4949;
+$disableRed: #f7aeae;
+$black: #000000;
+$pattemsBlue: #cff5ff;
+$azure: #fafeff;
+$pacificBlue: #009cc3;
+$whiteSmoke: #efefef;
+$aliceBlue: #fbfeff;
+$fireBush: #e3953a;
+$lochmara: #29759c;
+$pattemsBlue: #cff5ff;
+$pacificBlue: #009cc3;
+$whiteSmoke: #efefef;
+$aliceBlue: #fbfeff;
+$fireBush: #e3953a;
+$tabsBgr: #fafafa;
+$blizzardBlue: #ABEEFF;
+$ghostWhite2: #F8F8FB;
+$slateBlue: #7D63CC;
+$magnolia:#F7F4FC;
+$chinaIvory:#FFF5D1;
+$moonYellow:#EBB71C;
+$cornSilk:#FFFAE5;
+$solitude:#E9F0FF;
+$aliceBlue2: #EFF7FF;
+$whisper: #E8E8E8;
+$aqua :#22F5F5;
+$lilyWhite: #E4F9EE;
+$eucalyptus:#2FA46F;

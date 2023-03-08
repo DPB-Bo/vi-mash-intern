@@ -1,0 +1,438 @@
+/* You can add global styles to this file, and also import other style files */
+@import "styles-variables.scss";
+@import "scss/jpc.scss";
+
+// // regular style toast
+// @import '~ngx-toastr/toastr';
+
+// // bootstrap style toast
+// // or import a bootstrap 4 alert styled design (SASS ONLY)
+// // should be after your bootstrap imports, it uses bs4 variables, mixins, functions
+// @import '~ngx-toastr/toastr-bs4-alert';
+
+// // if you'd like to use it without importing all of bootstrap it requires
+// @import '~bootstrap/scss/functions';
+// @import '~bootstrap/scss/variables';
+// @import '~bootstrap/scss/mixins';
+// @import '~ngx-toastr/toastr-bs4-alert';
+/**
+ Material Theming ref: https://medium.com/@bogac/customization-of-an-angular-material-2-theme-typography-components-3ca5584f36ca
+*/
+$general-typography: mat-typography-config($font-family: "Noto Sans JP",
+  );
+
+@include mat-core($general-typography);
+
+$tc3s-app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($tc3s-app-theme);
+
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif !important;
+  font-size: 13px;
+  color: $fiord  !important;
+}
+
+main {
+  z-index: 0 !important;
+  padding-top: $mainToolbarHeight;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "NotoSans JP", sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+/*---------------- GLOBAL SHARED CLASSES ----------------*/
+
+::-webkit-scrollbar-track {
+  background-color: #f9f9f9;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: $primary;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  border-radius: 4px;
+  width: 1px;
+  height: 6px;
+}
+.ant-menu{
+  background: $fiord !important;
+}
+.ant-menu-sub{
+  background: $white !important;
+}
+.ant-menu-light .ant-menu-submenu-active,
+.ant-menu-light .ant-menu-submenu-title:hover {
+  color: $white  !important;
+  background-color: $color-background-hover;
+
+  mat-icon {
+    color: $color-primary  !important;
+  }
+}
+
+.overflow {
+  white-space: pre;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  background-color: $background-default;
+  border-radius: 4px;
+
+  .header-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 7.5px 12px;
+    background-color: $even-odd-row;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .title {
+      font-weight: 500;
+      font-size: 16px;
+      color: $color-primary;
+    }
+
+    .btn-close {
+      width: 10px;
+      height: 16px;
+
+      mat-icon {
+        display: flex;
+        width: 10px;
+        height: 16px;
+      }
+    }
+  }
+
+  .info-container {
+    padding: 0 12px 12px;
+    overflow-y: scroll;
+    width: 100%;
+  }
+
+  .btn-area {
+    padding: 0 17px 16px 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.lbl-input {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 150%;
+  color: $fiord;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  gap: 9px;
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .col.full {
+    width: 100%;
+  }
+
+  // .col:last-child {
+  //   padding-right: 0;
+  // }
+}
+
+/*-----------------------------------------------------------------------------------*/
+
+/*---------------- BUTTON MATERIAL CLASSES ----------------*/
+.mat-stroked-button {
+  color: $font-primary;
+  height: 30px;
+  line-height: 0 !important;
+
+  mat-icon {
+    width: 13px;
+  }
+
+  .mat-button-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.mat-raised-button {
+  height: 32px;
+  width: 80px;
+  line-height: 0 !important;
+
+  &.mat-primary:not(.mat-button-disabled):hover {
+    background-color: #29759c;
+  }
+
+  &.mat-warn {
+    background-color: $warn;
+
+    &:hover {
+      background: $fireBrick2;
+    }
+  }
+
+  mat-icon {
+    width: 13px;
+  }
+
+  .mat-button-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.mat-raised-button.btn-icon {
+  width: 35px;
+  min-width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-stroked-button.btn-icon-grid,
+.mat-raised-button.btn-icon-grid {
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.mat-stroked-button:not(.mat-button-disabled) {
+  background-color: #fff;
+}
+
+.mat-stroked-button.mat-button-disabled:hover {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+/*-----------------------------------------------------------------------------------*/
+
+/*---------------- INPUT MATERIAL CLASSES ----------------*/
+mat-form-field {
+  width: 135px;
+  line-height: 1.5;
+}
+.col-xs mat-form-field {
+  width: 80px;
+}
+
+.col-sm mat-form-field {
+  width: 106px;
+}
+
+.col-md mat-form-field {
+  width: 224px;
+  line-height: 1.5;
+}
+
+.col-large mat-form-field {
+  width: 100%;
+  line-height: 1.5;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 5px 0 !important;
+  padding-bottom: 0px !important;
+}
+
+.mat-form-field-label-wrapper {
+  padding-top: 0;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: $color-primary;
+}
+
+.input-disabled.mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline {
+  background: #f3f3f3 0% 0% no-repeat padding-box;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0.4395em 0 0.4395em !important;
+  font-size: 13px;
+  border-top: 0.2em solid transparent;
+
+  textarea {
+    height: 64px !important;
+  }
+}
+
+.mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline {
+  background-color: $color-netural;
+}
+
+.mat-input-element,
+.mat-input-element:disabled {
+  color: $fiord  !important;
+  line-height: 1.5625em !important;
+}
+
+.mat-select {
+  line-height: 1.5em;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: $white;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-start {
+  border-radius: 2px 0 0 2px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-end {
+  border-radius: 0 2px 2px 0 !important;
+}
+
+.mat-form-field-invalid .mat-input-element {
+  caret-color: $toolTipsError;
+}
+
+.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-datepicker-toggle-default-icon {
+  width: 13px !important;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/*---------------- SELECT MATERIAL CLASSES ----------------*/
+.mat-select-arrow {
+  color: $color-primary;
+}
+
+.mat-select-arrow-wrapper {
+  align-items: flex-end !important;
+  height: 11px !important;
+}
+
+/*-----------------------------------------------------------------------------------*/
+.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-datepicker-toggle-default-icon {
+  color: $color-primary;
+}
+
+.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button {
+  // height: 2em !important;
+  width: 15px !important;
+  height: 15px !important;
+  // justify-content: flex-end !important;
+}
+
+.mat-datepicker-toggle {
+  mat-icon {
+    width: 11px;
+    height: 18px;
+
+    svg>path {
+      fill: $color-primary;
+    }
+  }
+
+  .mat-button-disabled {
+    svg>path {
+      fill: #9f9f9f;
+    }
+  }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-suffix {
+  top: 0.5em;
+
+  mat-icon {
+    width: 14px;
+  }
+
+  .mat-button-disabled {
+    svg>path:first-child {
+      fill: #9f9f9f;
+    }
+  }
+}
+
+:ng-deep .disable-ripple {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*---------------- DATA TABLE CLASSES ----------------*/
+mat-checkbox.checkbox .mat-checkbox-frame {
+  border-color: #d6d6d6
+}
+
+/*---------------------------------------------------------*/
+.style-validate-icon {
+  color: red;
+  size: 20px;
+}
+
+/*---------------- EDIT, ADD TAB  ----------------*/
+.sticky-detail-tab {
+  position: sticky !important;
+  top: $stickyTop  !important;
+}
+
+/*---------------- BUTTON, COLOR ----------------*/
+.btn-export {
+  &:hover {
+    background-color: $whiteSmoke;
+  }
+}

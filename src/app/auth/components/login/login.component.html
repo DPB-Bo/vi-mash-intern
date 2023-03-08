@@ -1,0 +1,77 @@
+<div class="login-page">
+  <div class="form-login">
+    <form [formGroup]="loginForm"
+          novalidate>
+      <div class="image-login">
+        <mat-icon svgIcon="logo"></mat-icon>
+      </div>
+      <div class="title">{{ "screen.login.title" | translate }}</div>
+      <div class="group-ip-user">
+        <mat-form-field class="group-username">
+          <mat-icon svgIcon="icon-user-prefix"
+                    matPrefix></mat-icon>
+          <input matInput
+                 placeholder="{{ 'screen.login.placeholder-username' | translate }}"
+                 class="ip-username"
+                 formControlName="username"
+                 autocomplete="off"
+                 matTooltip="{{
+              (loginForm.get('username')?.status !== 'VALID' &&
+              loginForm.get('username')?.touched
+                ? utils.getMessError(loginForm.get('username')?.errors)
+                : '') | translate
+            }}"
+                 matTooltipClass="{{
+              loginForm.get('username')?.status !== 'VALID' &&
+              loginForm.get('username')?.touched
+                ? 'example-tooltip-red'
+                : ''
+            }}" />
+          <mat-icon svgIcon=""
+                    matSuffix></mat-icon>
+        </mat-form-field>
+        <mat-form-field class="group-password">
+          <mat-icon svgIcon="icon-password"
+                    matPrefix></mat-icon>
+          <input matInput
+                 placeholder="{{ 'screen.login.placeholder-password' | translate }}"
+                 class="ip-password"
+                 formControlName="password"
+                 [type]="showPassword ? 'text' : 'password'"
+                 autocomplete="new-password"
+                 matTooltip="{{
+              (loginForm.get('password')?.status !== 'VALID' &&
+              loginForm.get('password')?.touched
+                ? utils.getMessError(loginForm.get('password')?.errors)
+                : '') | translate
+            }}"
+                 matTooltipClass="{{
+              loginForm.get('password')?.status !== 'VALID' &&
+              loginForm.get('password')?.touched
+                ? 'example-tooltip-red'
+                : ''
+            }}" />
+          <mat-icon matSuffix
+                    class="icon-hidden-password"
+                    [svgIcon]="
+              showPassword ? 'icon-hidden-password' : 'icon-show-password'
+            "
+                    (click)="togglePassWord()"></mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="forgot-password">
+        <a class="forgot-pwd"
+           routerLink="/forgot-password">
+          <ins>{{ "screen.login.text-forgot-password" | translate }}</ins>
+        </a>
+      </div>
+      <button mat-raised-button
+              color="primary"
+              class="btn-login"
+              [disabled]="loginForm.invalid || !loginForm.touched"
+              (click)="submitForm()">
+        {{ "screen.login.btn-sign-in" | translate }}
+      </button>
+    </form>
+  </div>
+</div>

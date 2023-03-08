@@ -1,0 +1,31 @@
+<div class="header">
+  <div class="flex-center">
+    <mat-icon svgIcon="iconLogomenu"></mat-icon>
+    <span style="margin-left: 50px">{{ titelHeader }}</span>
+  </div>
+  <div class="menu-center"></div>
+  <div class="menu-user">
+    <a nz-dropdown [nzDropdownMenu]="menu">
+      <span class="username">{{userName}}</span>
+      <mat-icon svgIcon="iconUser"></mat-icon>
+    </a>
+  </div>
+</div>
+
+
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable class="list">
+    <li nz-menu-item (click)="changePassword()">
+      <mat-icon
+        class="icon-dropdown-user"
+        svgIcon="iconChangePassword"
+      ></mat-icon
+      ><span>change password</span>
+    </li>
+    <li nz-menu-item (click)="btnLogOut()">
+      <mat-icon class="icon-dropdown-user" svgIcon="iconLogout"></mat-icon
+      ><span>logout</span>
+    </li>
+  </ul>
+</nz-dropdown-menu>

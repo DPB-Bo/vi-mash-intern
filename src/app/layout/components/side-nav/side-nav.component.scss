@@ -1,0 +1,325 @@
+@import "src/styles/styles-variables.scss";
+@import "src/styles/scss/breakpoints.scss";
+
+.nav-bar {
+  background-color: $fiord;
+}
+
+.logo {
+  height: 52px;
+  background: $fiord;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  mat-icon {
+    width: 36px;
+  }
+}
+
+.display-none {
+  display: none !important;
+}
+
+::ng-deep .ant-layout-sider-light {
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+::ng-deep .ant-layout-sider-light,
+::ng-deep .ant-layout-sider-children {
+  background-color: $fiord;
+}
+
+::ng-deep .ant-menu-vertical {
+  border-right: none;
+}
+
+::ng-deep .user-menu.ant-menu-vertical .ant-menu-submenu {
+  color: $white;
+  background-color: $fiord;
+}
+
+::ng-deep .ant-menu-vertical .ant-menu-submenu {
+  color: $white;
+  background-color: $fiord;
+  font-size: 13px;
+}
+
+.ant-menu-inline .ant-menu-item-group-list .ant-menu-submenu-title,
+.ant-menu-inline .ant-menu-submenu-title,
+.ant-menu-vertical .ant-menu-item-group-list .ant-menu-submenu-title,
+::ng-deep .ant-menu-vertical .ant-menu-submenu-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // margin: 0;
+}
+
+::ng-deep .ant-menu-vertical .ant-menu-submenu-title {
+  padding: 0;
+}
+
+::ng-deep .ant-layout-sider-children .ant-menu.ant-menu-inline-collapsed {
+  width: 70px;
+}
+
+$heightItemMenuUser: (
+  40px * 9)+64px;
+
+.reponsive-user {
+  // @include max-desktop-down-1280() {
+  //   margin-top: 160px;
+  // }
+
+  // @include max-desktop-down-1440() {
+  //   margin-top: 280px;
+  // }
+
+  // @include max-desktop-down-1600() {
+  //   margin-top: 230px;
+  // }
+
+  // @include max-desktop-down-1920() {
+  //   margin-top: 480px;
+  // }
+
+  @media (max-height: 1080px) {
+    margin-top: calc(776px - $heightItemMenuUser
+    );
+}
+
+@media (max-height: 900px) {
+  margin-top: calc(730px - $heightItemMenuUser);
+}
+
+@media (max-height: 768px) {
+  margin-top: calc(480px - $heightItemMenuUser);
+}
+
+@media (min-height: 1081px) {
+  margin-top: calc(856px - $heightItemMenuUser);
+}
+}
+
+$heightItemMenuSystem: 64px+ (40px * 2);
+
+.reponsive-system {
+  margin-top: calc(538px - $heightItemMenuSystem);
+
+  @media (max-height: 1080px) {
+    margin-top: calc(856px - $heightItemMenuSystem);
+  }
+
+  @media (max-height: 900px) {
+    margin-top: calc(730px - $heightItemMenuSystem);
+  }
+
+  @media (max-height: 768px) {
+    margin-top: calc(538px - $heightItemMenuSystem);
+  }
+
+  @media (min-height: 1081px) {
+    margin-top: calc(856px - $heightItemMenuSystem);
+  }
+}
+
+.name-role {
+  min-width: 50px;
+  max-width: 50px;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.flex-grid {
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  columns: 2;
+  overflow-y: hidden;
+  font-size: 13px;
+}
+
+.flex-grid li {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  display: flex;
+  gap: 10px;
+  padding: 0 10px;
+  align-items: center;
+  color: $grey;
+  margin: 0;
+  height: 37px;
+
+  mat-icon {
+    width: 16px;
+  }
+}
+
+::ng-deep .flex-grid li.ant-menu-item-selected {
+  color: $color-primary !important;
+  background-color: $color-background-hover-seleted !important;
+}
+
+.flex-columns li:hover,
+.flex-grid li:hover {
+  background-color: $color-background-hover-seleted !important;
+  color: $color-primary !important;
+
+  ::ng-deep .color svg>path {
+    fill: $color-primary;
+  }
+}
+
+::ng-deep .ant-menu-vertical.ant-menu-sub {
+  min-width: 182px;
+}
+
+::ng-deep nz-sider {
+  min-width: unset !important;
+  width: unset !important;
+  max-width: unset !important;
+}
+
+.flex-columns li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  height: 37px;
+  font-size: 13px;
+
+  mat-icon {
+    width: 16px;
+  }
+}
+
+.flex-columns {
+  display: flex;
+  flex-direction: column;
+}
+
+::ng-deep .sub-menu .ant-menu-submenu-selected {
+  background-color: $white;
+}
+
+::ng-deep .ant-menu.ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+::ng-deep .user-menu .ant-menu-submenu {
+  height: 110px;
+
+  .ant-menu-submenu-title {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+::ng-deep .sub-menu .ant-menu-submenu-selected>.ant-menu-submenu-title {
+  color: $white;
+  background-color: $color-primary;
+}
+
+::ng-deep .sub-menu .ant-menu-submenu-selected.ant-menu-submenu-active {
+  background-color: $color-primary;
+}
+
+::ng-deep .user-menu.ant-menu-submenu-selected.ant-menu-submenu-active {
+  background-color: $color-primary !important;
+  color: $white;
+}
+
+.flex-columns li.user-menu {
+  background-color: $white;
+  color: $grey;
+}
+
+::ng-deep .user-menu.ant-menu-item-selected {
+  .color svg>path {
+    fill: $grey !important;
+  }
+}
+
+::ng-deep .user-menu mat-icon {
+  height: 29px;
+}
+
+::ng-deep .sub-menu .ant-menu-submenu-selected:hover {
+  background-color: $color-primary;
+
+  .ant-menu-submenu-title {
+    color: $white;
+  }
+}
+
+::ng-deep .color {
+  svg>path {
+    fill: $grey;
+  }
+}
+
+::ng-deep .color.user {
+  margin-bottom: 10px;
+
+  svg>path {
+    fill: $white;
+  }
+}
+
+::ng-deep .sub-menu .ant-menu-item-selected {
+  color: $color-primary;
+
+  .color svg>path {
+    fill: $color-primary;
+  }
+}
+
+::ng-deep .user-menu>.ant-menu-submenu-selected>.ant-menu-submenu-title {
+  background-color: none !important;
+  color: $white;
+}
+
+::ng-deep .ant-menu-submenu-arrow,
+.ant-menu-submenu-expand-icon,
+.ant-menu-submenu>.ant-menu-submenu-title::after {
+  display: none;
+}
+
+::ng-deep .specical-item-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: unset !important;
+  margin: unset !important;
+  color: #ffffff;
+
+  span {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+::ng-deep .specical-item-menu span:hover {
+  color: #ffffff !important;
+  background-color: rgba(149, 219, 255, 0.35);
+}
+
+::ng-deep .specical-item-menu-forcus.ant-menu-item {
+  color: #ffffff;
+  background-color: #4392bb !important;
+}
+
+::ng-deep .specical-item-menu-not-forcus.ant-menu-item {
+  color: #ffffff;
+  background-color: #485764 !important;
+}

@@ -1,0 +1,111 @@
+<div>
+  <div class="dialogcommon">
+    <div id="panelHeading"
+         class="panelHeading">
+      <span>
+        {{ dataOption.title | translate }}
+      </span>
+      <mat-icon class="icon-close"
+                (click)="handelCancel()">close</mat-icon>
+    </div>
+    <div class="search">
+      <div class="tbl-title">{{'common.dialog-search.title-input' | translate}}</div>
+      <div class="input-search">
+        <input #inputSearch
+               cdkFocusInitial
+               autocomplete="off"
+               [(ngModel)]="dataSeach"
+               class="input"
+               type="text"
+               placeholder="{{'common.dialog-search.title-placeholder' | translate }}" />
+        <div class="enable-btn-search"
+             (click)="handelSeach()">
+          {{ "common.button.search" | translate }}
+        </div>
+      </div>
+
+    </div>
+    <div class="title-search">{{'common.dialog-search.title-search' | translate}}</div>
+    <div class="table-container">
+      <div class="table-grid">
+        <div class="grid-header"
+             [ngStyle]="{ 'width.px': widthTable }">
+          <div class="grid-row">
+            <div class="grid-row-role">
+              <div class="table-th grid-header-col grid-col col-first place-w56">
+                <span> # </span>
+              </div>
+              <ng-container *ngFor="
+                                  let head of dataOption.listHeader;
+                                  let j = index;
+                                  let last = last;
+                                ">
+                <div class="table-th grid-header-col grid-col {{
+                  head.sticky ? 'col-sticky' : ''
+                }} "
+                     [ngStyle]="{
+                  'left.px': head.sticky ? totalLenghSticky(j) : 'none',
+                  'width.px': head.width,
+                  'min-width.px': head.width
+                }"
+                     *ngIf="!head.isHidden">
+                  <span [ngStyle]="{ 'justify-content': head.align }">
+                    {{ head.titleHeader | translate}}
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="grid-body"
+             [ngStyle]="{ 'width.px': widthTable }">
+          <div class="grid-row">
+            <div *ngFor="let data of listData; let j = index; let last = last; let d = even"
+                 class="grid-row-role"
+                 (click)="clickChoose(data)"
+                 (dblclick)="handelDblclick(data)"
+                 [class.avtive]="dataChoosse === coverObjectToString(data)">
+              <div class="table-th grid-body-col grid-col col-first place-w56"
+                   [class.backgound-even]="d">
+                <span style="justify-content: center">
+                  {{ j + 1 }}
+                </span>
+              </div>
+              <ng-container *ngFor="
+                    let header of dataOption.listHeader;
+                    let i = index;
+                    let last = last
+                  ">
+                <div class="grid-body-col grid-col  {{
+                    header.sticky ? 'col-sticky' : ''
+                  }} "
+                     [ngStyle]="{
+                    'left.px': header.sticky ? totalLenghSticky(i) : 'none',
+                    'min-width.px': header.width,
+                    'width.px': header.width,
+                    'padding-right':'4px'
+                  }"
+                     *ngIf="!header.isHidden "
+                     [class.backgound-even]="d">
+                  <span [ngStyle]="{ 'justify-content': header.align }"
+                        class="text-format"
+                        matTooltip="{{data[header.nameColum]}}"
+                        matTooltipClass="example-tooltip-info">
+                    {{ data[header.nameColum] }}
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="action">
+      <div class="btn-oke"
+           (click)="handelButtonOk()"
+           [class.disable-oke]="!dataChoosse || listData.length<1">
+        {{ "common.button.ok" | translate }}
+      </div>
+    </div>
+  </div>
+</div>

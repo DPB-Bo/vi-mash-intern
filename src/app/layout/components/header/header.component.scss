@@ -1,0 +1,63 @@
+$color-header : #23282c;
+$font-size-header : 14px;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 100%;
+  background-color: #fff;
+  color: $color-header;
+  font-size: $font-size-header;
+
+  mat-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .parent {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 0.014em;
+    color: #9F9F9F;
+    margin: auto 0;
+  }
+
+  .chilren {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 0.014em;
+    color: #4392BB;
+    margin: auto 0;
+  }
+
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu-user{
+    display: flex;
+    height: 75%;
+    border: 1px solid #4392BB;
+    border-radius: 4px;
+    padding: 0 10px;
+  }
+  .menu-user a.ant-dropdown-trigger.ant-dropdown-link{
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 10px;
+  }
+}
+::ng-deep ul.list{
+  padding: 0;
+  border: 1px solid #4392BB;
+}
+::ng-deep .list li.ant-dropdown-menu-item{
+  gap: 10px;
+}

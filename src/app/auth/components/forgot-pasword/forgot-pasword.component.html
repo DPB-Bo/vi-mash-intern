@@ -1,0 +1,52 @@
+<div class="forgot-pwd-mail-page">
+  <div class="form-forgot-pwd">
+    <form [formGroup]="forgotPasswordByEmailForm"
+          novalidate>
+      <div class="image-forgot-pwd">
+        <mat-icon svgIcon="logo"></mat-icon>
+      </div>
+      <div class="title">
+        <mat-icon class="icon-back"
+                  svgIcon="icon-back"
+                  routerLink="/auth/login"></mat-icon>
+        <span class="txt-forgot-pwd">{{'screen.fortgot-password.title' | translate}}</span>
+      </div>
+      <div class="group-ip-password">
+        <mat-form-field class="group-email">
+          <mat-icon class="icon-email"
+                    svgIcon="icon-mail"
+                    matPrefix></mat-icon>
+          <input matInput
+                 placeholder="{{'screen.fortgot-password.placeholder-email' | translate}}"
+                 class="ip-email"
+                 formControlName="email"
+                 autocomplete="off"
+                 matTooltip="{{
+                  (forgotPasswordByEmailForm.get('email')?.status !== 'VALID' &&
+                  forgotPasswordByEmailForm.get('email')?.touched
+                    ? utils.getMessError(forgotPasswordByEmailForm.get('email')?.errors)
+                    : '') | translate
+                }}"
+                 matTooltipClass="{{
+                  forgotPasswordByEmailForm.get('email')?.status !== 'VALID' &&
+                  forgotPasswordByEmailForm.get('email')?.touched
+                    ? 'example-tooltip-red'
+                    : ''
+                }}" />
+          <mat-icon svgIcon=""
+                    matSuffix></mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="note">
+        {{'screen.fortgot-password.text-note' | translate}}
+      </div>
+      <button mat-raised-button
+              color="primary"
+              [disabled]="forgotPasswordByEmailForm.invalid || !forgotPasswordByEmailForm.touched"
+              class="btn-forgot-pwd-mail"
+              (click)="submitFormByEmail()">
+        {{'screen.fortgot-password.btn-change-password' | translate}}
+      </button>
+    </form>
+  </div>
+</div>

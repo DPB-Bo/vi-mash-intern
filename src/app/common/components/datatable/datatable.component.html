@@ -1,0 +1,409 @@
+<div class="container">
+  <div class="tbl-header">
+    <div class="tbl-title">
+      {{ tableConfig.title | translate }}
+      <div class="btn-area-table">
+        <button mat-stroked-button
+                *ngIf="tableConfig.btnExport"
+                color="primary"
+                class="btn-export"
+                matTooltipPosition="after"
+                id="exportCSV"
+                [disabled]="dataSource.results.length < 1">
+          <mat-icon svgIcon="icon-export-blue"></mat-icon><span>{{ "common.button.CSV" | translate }}</span>
+        </button>
+        <button mat-raised-button
+                *ngIf="tableConfig.btnAddMore"
+                color="primary"
+                class="btn-icon"
+                matTooltipPosition="after"
+                #btnAddMoreTable
+                id="btnAddMoreTable"
+                [disabled]="isDisableButton">
+          <mat-icon svgIcon="icon-plus"></mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="pagination">
+      <span class="pgn-label">{{
+        "common.paging.total-checked" | translate
+        }}</span>
+      <span class="pgn-label">{{ dataSource.results.length }}</span>
+      <span class="pgn-label"> / </span>
+      <span class="pgn-total">{{ dataSource.totalRecords }}</span>
+      <span class="pgn-label">{{ "common.paging.total" | translate }}</span>
+    </div>
+  </div>
+  <div *ngIf="displayColumns.length > 0 && dataSource"
+       #container
+       class="table-container"
+       [ngClass]="{hiddenScrollBar : dataSource.results.length < 1}"
+       [ngStyle]="{'max-height': dataSource.totalRecords > dataSource.noRecordInPage? '63.3vh': '70.5vh'}">
+
+    <table mat-table
+           *ngIf="dataSource.results.length > 0"
+           matSort
+           #matTable
+           [dataSource]="data"
+           (matSortChange)="handleSort.emit($event)"
+           [matSortDisabled]="disableSort"
+           [matSortActive]="sortData.active"
+           [matSortDirection]="sortData.direction"
+           [matSortDisableClear]="true">
+      <ng-container *ngFor="let column of columnDefinition"
+                    [matColumnDef]="column.id"
+                    [sticky]="column.sticky ? true : false"
+                    [stickyEnd]="column.stickyEnd ? true : false">
+        <ng-container [ngSwitch]="column.type">
+          <!-- ::::::::::::::::::::::::::::::::::INDEX:::::::::::::::::::::::::::::::::::::::: -->
+          <div *ngSwitchCase="'index'">
+            <th *matHeaderCellDef
+                mat-header-cell
+                [class.cell-align-center]="column.alignCenter"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+
+              }">
+              <div class="cell-overflow table-header">
+                {{ column.name | translate }}
+              </div>
+            </th>
+            <td *matCellDef="let row; let j = index"
+                mat-cell
+                [class.cell-align-center]="column.alignCenter"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }">
+              <div class="cell-overflow">
+                {{ j + 1 }}
+              </div>
+            </td>
+          </div>
+          <!-- ::::::::::::::::::::::::::::::::::TEXT:::::::::::::::::::::::::::::::::::::::: -->
+          <div *ngSwitchCase="'text'">
+            <th *matHeaderCellDef
+                mat-header-cell
+                mat-sort-header
+                disabled="{{ !column.orderable }}"
+                [class.cell-align-center]="column.alignCenter"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }">
+              {{ column.name | translate }}
+            </th>
+            <td *matCellDef="let element"
+                mat-cell
+                class="overflow"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }"
+                [matTooltip]=" utils.getValueByKey(element, column.id) && column.showTooltip?  utils.getValueByKey(element, column.id) : ''"
+                matTooltipClass="example-tooltip-info"
+                [class.cell-align-right]="column.alignRight"
+                [class.cell-align-center]="column.alignCenter">
+              <span *ngIf="!column.format"
+                    [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }">
+                {{
+                !utils.getValueByKey(element, column.id)
+                ? "-"
+                : utils.getValueByKey(element, column.id)
+                }}
+              </span>
+              <span *ngIf="column && column.format && isNumber(column.format)"
+                    [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }">
+                {{
+                utils.getValueByKey(element, column.id)
+                | currencyFormatPipe: pipeNumber(column.format)
+                }}
+              </span>
+              <span *ngIf="column && column.format && isDateTime(column.format)"
+                    [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }">
+                {{
+                utils.getValueByKey(element, column.id)
+                | datetimeformat2: pipeDateTime(column.format)
+                }}
+              </span>
+            </td>
+          </div>
+          <!-- ::::::::::::::::::::::::::::::::::TEXT-ZERO-FILL:::::::::::::::::::::::::::::::::::::::: -->
+          <div *ngSwitchCase="'text-zero-fill'">
+            <th *matHeaderCellDef
+                mat-header-cell
+                [class.cell-align-center]="column.alignCenter"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }">
+              {{ column.name | translate }}
+            </th>
+            <td *matCellDef="let element"
+                mat-cell
+                class="overflow"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }"
+                [class.cell-align-right]="column.alignRight"
+                [class.cell-align-center]="column.alignCenter">
+              <span *ngIf="!column.format">
+                {{
+                !utils.getValueByKey(element, column.id)
+                ? "-"
+                : dataZeroFill(
+                utils.getValueByKey(element, column.id),
+                column.zeroFill ? column.zeroFill : 6
+                )
+                }}
+              </span>
+            </td>
+          </div>
+          <!-- ::::::::::::::::::::::::::::::::::TEXT-VALUE-RADIO:::::::::::::::::::::::::::::::::::::::: -->
+          <div *ngSwitchCase="'text-value-radio'">
+            <th *matHeaderCellDef
+                mat-header-cell
+                [class.cell-align-center]="column.alignCenter"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }">
+              {{ column.name | translate }}
+            </th>
+            <td *matCellDef="let element"
+                mat-cell
+                class="overflow"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }"
+                [class.cell-align-right]="column.alignRight"
+                [class.cell-align-center]="column.alignCenter">
+              <span *ngIf="!column.format">
+                {{
+                !utils.getValueByKey(element, column.id)
+                ? "-"
+                : dataRadioColum(
+                column.arrayTextValueRadio
+                ? column.arrayTextValueRadio
+                : [],
+                utils.getValueByKey(element, column.id)
+                )
+                }}
+              </span>
+            </td>
+          </div>
+          <!-- ::::::::::::::::::::::::::::::::::SELECT CHECKBOX:::::::::::::::::::::::::::::::::::::::: -->
+          <div *ngSwitchCase="'selection'">
+            <th *matHeaderCellDef
+                mat-header-cell
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }"
+                [class.cell-align-center]="column.alignCenter">
+              <mat-checkbox *ngIf="column.showSelectAll"
+                            class="checkbox"
+                            color="primary"
+                            (change)="$event ? toggleAllRows() : null"
+                            [checked]="selectionModel.hasValue() && isAllSelected()"
+                            [indeterminate]="selectionModel.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell
+                *matCellDef="let row"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }"
+                [class.cell-align-center]="column.alignCenter">
+              <mat-checkbox class="checkbox"
+                            color="primary"
+                            (click)="$event.stopPropagation()"
+                            (change)="$event ? selectionModel.toggle(row) : null"
+                            [checked]="isSelectedItem(row)">
+              </mat-checkbox>
+            </td>
+          </div>
+          <!-- :::::::::::::::::::::::::::::::::::::OPTIONS::::::::::::::::::::::::::::::::::::: -->
+          <div *ngSwitchCase="'button'">
+            <th *matHeaderCellDef
+                mat-header-cell
+                class="cell-align-center"
+                [ngStyle]="{
+                width: (!isShowOption ? column.weight || 0 : 0) + 'px',
+                'min-width': (!isShowOption ? column.weight || 0 : 0) + 'px',
+                borderLeft: isShowOption ? 'unset' : ''
+              }">
+              <div class="cell-overflow"
+                   *ngIf="!isShowOption">
+                {{ "common.datatable.btn-action" | translate }}
+              </div>
+            </th>
+            <td *matCellDef="let element"
+                mat-cell
+                class="cell-align-center btn-action"
+                [ngStyle]="{
+                borderLeft: isShowOption ? 'unset' : ''
+              }">
+              <ng-container *ngFor="let option of column.options">
+                <mat-icon [svgIcon]="option.icon || ''"
+                          matTooltip="{{ option.name | translate }}"
+                          matTooltipPosition="before"
+                          (click)="onBtnClick(option.id || 'string', element)"
+                          *ngIf="!isShowOption"
+                          id="{{option.id}}"></mat-icon>
+              </ng-container>
+            </td>
+          </div>
+          <!-- :::::::::::::::::::::::::::::::::::::TEXTCOLOR::::::::::::::::::::::::::::::::::::: -->
+          <div *ngSwitchCase="'textColor'">
+            <th *matHeaderCellDef
+                mat-header-cell
+                class="cell-align-center"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }">
+              {{ column.name | translate }}
+            </th>
+            <td *matCellDef="let element"
+                mat-cell
+                class="overflow"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }"
+                class="cell-align-center">
+              <div class="text-color-col"
+                   [ngStyle]="{
+                  width: (column.weight || 0) + 'px',
+                  'min-width': (column.weight || 0) + 'px'
+                }">
+
+                <span *ngIf="!column.format"
+                      [class.untreated]="utils.getValueByKey(element, column.id) === '0'"
+                      [class.processing]="utils.getValueByKey(element, column.id) === '1'"
+                      [class.processed]="utils.getValueByKey(element, column.id) === '2'">
+                  {{
+                  utils.getStatusString( utils.getValueByKey(element, column.id),'textColor') | translate
+                  }}
+                </span>
+              </div>
+            </td>
+          </div>
+          <!-- :::::::::::::::::::::::::::::::::::::PREVIEW::::::::::::::::::::::::::::::::::::: -->
+          <div *ngSwitchCase="'preview'">
+            <th *matHeaderCellDef
+                mat-header-cell
+                class="cell-align-center"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }">
+              {{ column.name | translate }}
+            </th>
+            <td *matCellDef="let element"
+                mat-cell
+                class="overflow"
+                [ngStyle]="{
+                width: (column.weight || 0) + 'px',
+                'min-width': (column.weight || 0) + 'px'
+              }"
+                class="cell-align-center">
+              <div class="text-color-col preview"
+                   [ngStyle]="{
+                  width: (column.weight || 0) + 'px',
+                  'min-width': (column.weight || 0) + 'px'
+                }">
+                  <button [ngStyle]="{
+                    'background-color': (column.backgroundColor || '#4392BB'),
+                    'color': (column.color || '#FFFFFF'),
+                    'width': (column.weight || 0) + 'px',
+                    'min-width': (column.weight || 0) + 'px'
+                  }"
+                          class="export" (click)="onBtnPreviewClick(element)">{{'common.button.preview'|translate}}
+                  </button>
+              </div>
+            </td>
+          </div>
+
+          <div *ngSwitchCase="'status'">
+            <th *matHeaderCellDef
+                mat-header-cell
+                class="cell-align-center"
+                [ngStyle]="{
+                          width: (column.weight || 0) + 'px',
+                          'min-width': (column.weight || 0) + 'px'
+                        }">
+              {{ column.name | translate }}
+            </th>
+            <td *matCellDef="let element"
+                mat-cell
+                class="overflow"
+                [ngStyle]="{
+                          width: (column.weight || 0) + 'px',
+                          'min-width': (column.weight || 0) + 'px'
+                        }"
+                class="cell-align-center">
+              <div class="status-col"
+                   [ngStyle]="{
+                            width: (column.weight || 0) + 'px',
+                            'min-width': (column.weight || 0) + 'px'
+                          }">
+
+                <span *ngIf="!column.format"
+                      [class.not-yet]="utils.getValueByKey(element, column.id)[0] === '0'"
+                      [class.in-progress]="utils.getValueByKey(element, column.id)[0] === '1'"
+                      [class.done]="utils.getValueByKey(element, column.id)[0] === '2'">
+                  {{
+                  utils.getStatusString( utils.getValueByKey(element, column.id)[0],'closeStatus') | translate
+                  }}
+                </span>
+                <span *ngIf="!column.format"
+                      [class.close]="utils.getValueByKey(element, column.id)[2] === '0'"
+                      [class.open]="utils.getValueByKey(element, column.id)[2] === '1'">
+                  {{
+                  utils.getStatusString( utils.getValueByKey(element, column.id)[2],'inputStatus') | translate
+                  }}
+                </span>
+              </div>
+            </td>
+          </div>
+        </ng-container>
+      </ng-container>
+      <tr mat-header-row
+          *matHeaderRowDef="displayColumns;  sticky: true"></tr>
+      <tr mat-row
+          [class.highlight]="checkFocus(row)"
+          *matRowDef="let row; columns: displayColumns"
+          (dblclick)="handelDbClick(row)"></tr>
+    </table>
+
+    <ng-container *ngIf="dataSource.results.length === 0">
+      <div class="no-data-row">
+        <span>{{ "common.datatable.no-data" | translate }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <div class="btn-show-more"
+       *ngIf="dataSource.totalRecords > dataSource.noRecordInPage">
+    <button mat-stroked-button
+            color="default"
+            id="showMore">
+      <mat-icon svgIcon="icon-show-more"></mat-icon>
+      {{ "common.button.show-more" | translate }}
+    </button>
+  </div>
+</div>

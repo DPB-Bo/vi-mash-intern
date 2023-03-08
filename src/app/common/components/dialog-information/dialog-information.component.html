@@ -1,0 +1,30 @@
+<mat-toolbar [ngClass]="color">
+        <mat-icon svgIcon="icon-close-dialog"
+                  (click)="data.negative?.click()"></mat-icon>
+</mat-toolbar>
+
+<div class="title-background">
+        <span>{{ 'common.title.title-confirm' | translate}}</span>
+</div>
+
+<div class="message">
+        <mat-icon [svgIcon]="icon"></mat-icon>
+        <p class="title"
+           *ngIf="data.content"
+           innerHtml="{{ data.content | translate}}"></p>
+</div>
+
+<div mat-dialog-actions
+     class="btn-dialog-actions">
+
+     <button *ngIf="data.positive"
+     mat-raised-button
+     color="primary"
+     (click)="data.positive.click()">{{ data.positive.title | translate }}
+    </button>
+    <button *ngIf="data.negative"
+            mat-stroked-button
+            class="mgr-20"
+            (click)="data.negative.click()">{{ data.negative.title | translate }}
+    </button>
+</div>

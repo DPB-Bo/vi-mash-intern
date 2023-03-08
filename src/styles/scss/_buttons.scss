@@ -1,0 +1,48 @@
+.btn{
+  width: 91px;
+  height: 35px;
+  font-size: 13px;
+  transition: background-color .2s;
+  font-family: 'Noto Sans JP';
+  font-weight: 500;
+}
+
+.btn mat-icon{
+  width: 12px;
+  height: 12px;
+  line-height: 0;
+  margin-right: 10px;
+  transform: translateY(-1px);
+}
+.btn.btn-primary{
+  background-color: #4392BB;
+  color: white;
+
+}
+.btn.btn-primary:hover{
+  background-color: #29759C;
+}
+
+.btn.btn-secondary{
+  background-color: white;
+  border: 1px solid #D6D6D6;
+  color: #4392BB;
+}
+.btn.btn-secondary:hover{
+  background-color: white;
+  border: 1px solid #D6D6D6;
+}
+
+.btn.btn-warning{
+  background: #EB5757;
+  color: white;
+}
+.btn.btn-warning:hover{
+  background: #CA1C1C;
+}
+.btn:disabled{
+  background-color: white;
+  border: 1px solid #D6D6D6;
+  color:  #D6D6D6;
+  pointer-events: none;
+}
